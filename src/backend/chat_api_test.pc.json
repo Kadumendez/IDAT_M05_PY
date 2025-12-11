@@ -1,0 +1,59 @@
+{
+	"info": {
+		"_postman_id": "6eabc169-844b-41d3-9f2d-a0fcf2b6d66c",
+		"name": "IDAT_M05_PY_PRUEBAS_API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "49243007",
+		"_collection_link": "https://kadumendez-9661578.postman.co/workspace/Kad%25C3%25BA-Desposorio's-Workspace~82be6611-f290-43c5-8f2b-42a54c44846e/collection/49243007-6eabc169-844b-41d3-9f2d-a0fcf2b6d66c?action=share&source=collection_link&creator=49243007"
+	},
+	"item": [
+		{
+			"name": "01_Health_Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/ping",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"ping"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "02_Chat_IA",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"message\": \"¿Qué es Beca 18?\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/api/chat",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"api",
+						"chat"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

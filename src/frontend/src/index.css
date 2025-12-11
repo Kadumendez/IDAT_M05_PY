@@ -1,0 +1,105 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Design System - Orientador Vocacional Perú */
+
+@layer base {
+  :root {
+    --background: 240 10% 4%;
+    --foreground: 40 15% 92%;
+
+    --card: 240 8% 8%;
+    --card-foreground: 40 15% 92%;
+
+    --popover: 240 8% 8%;
+    --popover-foreground: 40 15% 92%;
+
+    --primary: 35 95% 55%;
+    --primary-foreground: 240 10% 4%;
+
+    --secondary: 240 8% 12%;
+    --secondary-foreground: 40 15% 92%;
+
+    --muted: 240 6% 18%;
+    --muted-foreground: 240 5% 50%;
+
+    --accent: 25 95% 55%;
+    --accent-foreground: 40 15% 92%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 40 15% 92%;
+
+    --border: 240 6% 18%;
+    --input: 240 6% 18%;
+    --ring: 35 95% 55%;
+
+    --radius: 0.75rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Custom scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--muted));
+    border-radius: 3px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground) / 0.5);
+  }
+}
+
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse-slow 6s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  @keyframes pulse-slow {
+    0%, 100% {
+      opacity: 0.6;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+  }
+
+  .animate-fade-in {
+    animation: fade-in 0.4s ease-out;
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted)) transparent;
+  }
+}

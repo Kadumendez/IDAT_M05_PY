@@ -1,0 +1,34 @@
+# --- Dependencias de Node (Backend y Frontend) ---
+node_modules/
+npm-debug.log
+yarn-error.log
+dist/
+build/
+.cache/
+
+# --- Variables de Entorno y Secretos (MUY IMPORTANTE) ---
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
+# --- Terraform (Infraestructura) ---
+# Nunca subas el estado de terraform (contiene info sensible)
+.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+.terraform.lock.hcl
+
+# --- IDEs y Sistema Operativo ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# --- AWS ---
+# Por si acaso generas credenciales locales
+.aws/
+README.md
