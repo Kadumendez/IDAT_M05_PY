@@ -67,33 +67,38 @@ resource "aws_instance" "app_server" {
   # --- SCRIPT DE INICIO CORREGIDO (User Data) ---
   user_data = <<-EOF
               #!/bin/bash
-              # 1. Instalar dependencias esenciales y Docker
-              apt-get update
-              apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release
+              set -e  # Detener si hay error
               
-              # Instalar Docker (Método recomendado)
+              # 1. Instalar dependencias esenciales (AÑADIDO UNZIP)
+              apt-get update
+              apt-get install -y apt-transport-https ca-certificates curl gnupg lsb-release unzip
+              
+              # 2. Instalar Docker
               install -m 0755 -d /etc/apt/keyrings
               curl -fsSL https://download.docker.com/linux/ubuntu/gpg | gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+              chmod a+r /etc/apt/keyrings/docker.gpg
+              
               echo \
                 "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
                 $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+              
               apt-get update
               apt-get install -y docker-ce docker-ce-cli containerd.io
 
-              # 2. Instalar AWS CLI v2 (Método más confiable para ECR)
+              # 3. Instalar AWS CLI v2
               curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
               unzip awscliv2.zip
               ./aws/install
 
-              # 3. Loguearse en AWS ECR
+              # 4. Loguearse en AWS ECR (Usando la ruta completa de aws)
               /usr/local/bin/aws ecr get-login-password --region ${var.aws_region} | docker login --username AWS --password-stdin ${aws_ecr_repository.backend_repo.repository_url}
 
-              # 4. Descargar y Correr Backend (Puerto 3000)
+              # 5. Descargar y Correr Backend
               docker run -d --restart always -p 3000:3000 \
                 -e GROQ_API_KEY="${var.groq_api_key}" \
                 ${aws_ecr_repository.backend_repo.repository_url}:latest
 
-              # 5. Descargar y Correr Frontend (Puerto 80)
+              # 6. Descargar y Correr Frontend
               docker run -d --restart always -p 80:80 \
                 ${aws_ecr_repository.frontend_repo.repository_url}:latest
               EOF
