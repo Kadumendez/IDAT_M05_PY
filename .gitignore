@@ -31,5 +31,4 @@ Thumbs.db
 # --- AWS ---
 # Por si acaso generas credenciales locales
 .aws/
-README.md
 NOTES DK.txt
