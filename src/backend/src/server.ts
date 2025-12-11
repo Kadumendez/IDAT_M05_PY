@@ -12,31 +12,38 @@ app.use(express.json());
 
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
-// --- NUEVO ENDPOINT GET (Health Check) ---
-// Esto sirve para probar que el servidor vive sin gastar saldo de IA
+// Health Check
 app.get('/ping', (req, res) => {
-    res.json({
-        status: 'ok',
-        message: 'El servidor está activo y escuchando 🤖',
-        timestamp: new Date().toISOString()
-    });
+    res.json({ status: 'ok', message: 'Servidor Orientador Activo 🧠🇵🇪' });
 });
 
-// --- TU ENDPOINT POST (El Chat) ---
 app.post('/api/chat', async (req, res) => {
-    const { message } = req.body;
-    // console.log("📩 Pregunta:", message); // Comenta esto si ensucia mucho la terminal
+    const { history } = req.body;
+
+    if (!history || !Array.isArray(history)) {
+        return res.status(400).json({ error: "El historial es requerido" });
+    }
 
     try {
         const chatCompletion = await groq.chat.completions.create({
             messages: [
                 {
                     role: "system",
-                    content: "Eres un orientador vocacional experto en Perú. Ayuda sobre becas y universidades. Sé breve."
+                    content: `Eres un orientador vocacional experto en Perú 🇵🇪. Tu misión es ayudar a estudiantes de secundaria y egresados a encontrar su camino profesional.
+
+                    REGLAS DE TUS RESPUESTAS:
+                    1. **Formato:** Usa SIEMPRE Markdown para estructurar tu respuesta. Usa **negritas** para conceptos clave y listas (- o 1.) para requisitos o pasos.
+                    2. **Expertise:** Eres especialista en Beca 18, PRONABEC, exámenes de admisión (UNI, San Marcos, Villarreal, PUCP, UTP) y carreras técnicas (Senati, Tecsup).
+                    3. **Tono:** Sé empático, motivador ("¡Tú puedes!", "Es un gran objetivo") pero realista y claro.
+                    4. **Memoria:** Si el usuario te ha dicho su nombre en mensajes anteriores, ÚSALO para personalizar la respuesta.
+                    5. **Claridad:** Si te preguntan requisitos, dalos en una lista clara. No uses párrafos gigantes.
+
+                    Si te preguntan algo fuera de educación, responde amablemente que solo puedes asesorar sobre temas educativos.`
                 },
-                { role: "user", content: message },
+                ...history
             ],
             model: "llama-3.3-70b-versatile",
+            temperature: 0.7, // Un poco de creatividad, pero enfocado
         });
 
         const respuesta = chatCompletion.choices[0]?.message?.content || "";
