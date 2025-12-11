@@ -7,21 +7,23 @@
 ![CI/CD](https://img.shields.io/badge/GitHub-Actions-black)
 
 ## 📑 Índice
-1. [Introducción y Objetivos](#introducción-y-objetivos)
-2. [Diseño de Arquitectura](#diseño-de-arquitectura)
-3. [Stack Tecnológico](#stack-tecnológico)
-4. [Prerrequisitos](#prerrequisitos)
-5. [Instalación y Ejecución Local (Paso a Paso)](#instalación-y-ejecución-local-paso-a-paso)
+1. [Introducción y Objetivos](#📋-introducción-y-objetivos)
+2. [Diseño de Arquitectura](#🏗️-diseño-de-arquitectura)
+3. [Stack Tecnológico](#🧰-stack-tecnológico)
+4. [Estructura del proyecto](#📁-estructura-del-proyecto)
+5. [Prerrequisitos](#📌-prerrequisitos)
+6. [Instalación y Ejecución Local (Paso a Paso)](#🚀-instalación-y-ejecución-local-paso-a-paso)
   - [Backend](#backend)
   - [Frontend](#frontend)
-6. [Contenerización con Docker](#contenerización-con-docker)
+7. [Contenerización con Docker](#🐳-contenerización-con-docker)
   - [Construir y ejecutar localmente](#construir-y-ejecutar-localmente)
-  - [Publicar en AWS ECR](#publicar-en-aws-ecr)
-7. [Infraestructura en AWS (Terraform)](#infraestructura-en-aws-terraform)
-8. [Pipeline CI/CD](#pipeline-cicd)
-9. [Testing y QA](#testing-y-qa)
-10. [Resolución de problemas](#resolución-de-problemas-comunes)
-11. [Referencias](#referencias)
+  - [Publicar imágenes en AWS ECR](#publicar-imágenes-en-aws-ecr)
+8. [Infraestructura en AWS (Terraform)](#🏗️-infraestructura-en-aws-terraform)
+9. [Pipeline CI/CD](#⚙️-pipeline-cicd)
+10. [Testing y QA](#✅-testing-y-qa)
+11. [Resolución de problemas](#🛠️-resolución-de-problemas-comunes)
+12. [Referencias](#📚-referencias)
+13. [Equipo](#🤝-equipo)
 
 ---
 
@@ -357,5 +359,5 @@ curl http://localhost:8080
 
 ---
 
-
+[Click para volver al inicio](#ai-academic-tool---cloud--devops-project)
 
