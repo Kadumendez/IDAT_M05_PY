@@ -7,21 +7,21 @@
 ![CI/CD](https://img.shields.io/badge/GitHub-Actions-black)
 
 ## 📑 Índice
-1. [Introducción y Objetivos](#-introducción-y-objetivos)
-2. [Diseño de Arquitectura](#-diseño-de-arquitectura)
-3. [Stack Tecnológico](#-stack-tecnológico)
-4. [Prerrequisitos](#-prerrequisitos)
-5. [Instalación y Ejecución Local (Paso a Paso)](#-instalación-y-ejecución-local-paso-a-paso)
+1. [Introducción y Objetivos](#introducción-y-objetivos)
+2. [Diseño de Arquitectura](#diseño-de-arquitectura)
+3. [Stack Tecnológico](#stack-tecnológico)
+4. [Prerrequisitos](#prerrequisitos)
+5. [Instalación y Ejecución Local (Paso a Paso)](#instalación-y-ejecución-local-paso-a-paso)
   - [Backend](#backend)
   - [Frontend](#frontend)
-6. [Contenerización con Docker](#-contenerización-con-docker)
+6. [Contenerización con Docker](#contenerización-con-docker)
   - [Construir y ejecutar localmente](#construir-y-ejecutar-localmente)
   - [Publicar en AWS ECR](#publicar-en-aws-ecr)
-7. [Infraestructura en AWS (Terraform)](#-infraestructura-en-aws-terraform)
-8. [Pipeline CI/CD](#-pipeline-cicd)
-9. [Testing y QA](#-testing-y-qa)
-10. [Resolución de problemas](#-resolución-de-problemas)
-11. [Referencias](#-referencias)
+7. [Infraestructura en AWS (Terraform)](#infraestructura-en-aws-terraform)
+8. [Pipeline CI/CD](#pipeline-cicd)
+9. [Testing y QA](#testing-y-qa)
+10. [Resolución de problemas](#resolución-de-problemas-comunes)
+11. [Referencias](#referencias)
 
 ---
 
@@ -47,11 +47,11 @@ Mapa conceptual (ASCII) adaptado al proyecto:
 └─────────────┬────────────────────┘
               │
               ▼
-   ┌───────────────────────────────┐      ┌──────────────────────┐
-   │ Frontend (Nginx)              │─────>│ Backend API (Express)│
-   │ - Sirve build de Vite/React    │  API │ - Rutas REST / Websockets
-   │ - Puerto 80 (contenedor)       │      │ - Puerto 3000         │
-   └─────────────┬─────────────────┘      └──────────┬───────────┘
+   ┌───────────────────────────────┐       ┌───────────────────────────┐
+   │ Frontend (Nginx)              │─────> │ Backend API (Express)     │
+   │ - Sirve build de Vite/React   │  API  │ - Rutas REST / Websockets │
+   │ - Puerto 80 (contenedor)      │       │ - Puerto 3000             │
+   └─────────────┬─────────────────┘       └────────────┬──────────────┘
                  │ Pull desde ECR                       │ llama/Groq
                  ▼                                      ▼
    ┌───────────────────────────────┐      ┌──────────────────────┐
@@ -65,7 +65,7 @@ Mapa conceptual (ASCII) adaptado al proyecto:
    │ - Ejecuta contenedores        │
    │ - Provisionado por Terraform  │
    └───────────────────────────────┘
-
+```
 Flujo de despliegue (CI/CD):
 
 GitHub Actions -> Build Docker -> Push a ECR -> EC2 pull & run
@@ -92,6 +92,7 @@ Notas:
 ## 📁 Estructura del proyecto
 
 Estructura adaptada al repositorio actual (resumen):
+
 
 ```
 IDAT_M05_PY/
